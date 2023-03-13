@@ -1,8 +1,10 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { MappedImageSchema } from './types.js';
-import localImageMap from './../../../src/data/local-image-map.js';
-import externalImageMap from './../../../src/data/external-image-map.js';
+import { getImageData, getImageUrl } from './utils';
+// @ts-ignore: The local image map should be available in the Astro site that uses this integration
+import localImageMap from './src/data/local-image-map';
+// @ts-ignore: The external image map should be available in the Astro site that uses this integration
+import externalImageMap from './src/data/external-image-map';
 
 interface Props extends HTMLAttributes<'img'> {}
 
@@ -12,27 +14,11 @@ const { alt, class: className, src, title } = Astro.props;
 if (!src) throw new Error('ImageTag requires a src prop for the image src attribute.');
 if (!alt) throw new Error(`ImageTag requires an alt prop for the image alt text.\nsrc: ${src}`);
 
-const LOCAL_PREFIX = 'local://';
-const EXTERNAL_PREFIX = 'external://';
-
-// Determine if the image is local or external
-const isLocal = src.startsWith(LOCAL_PREFIX) ? true : src.startsWith(EXTERNAL_PREFIX) ? false : null;
-if (isLocal === null) {
-  throw new Error(
-    `ImageTag requires a src prop that starts with either ${LOCAL_PREFIX} or ${EXTERNAL_PREFIX}.\nsrc: ${src}`
-  );
-}
-
 // Get the image width and height from the corresponding image map
-let cSrc = src.replace(isLocal ? LOCAL_PREFIX : EXTERNAL_PREFIX, '');
-const map = isLocal ? localImageMap : externalImageMap;
-const { width: cWidth, height: cHeight } = MappedImageSchema.parse(map[cSrc as keyof typeof map]);
+const { width, height } = getImageData(src, localImageMap, externalImageMap);
 
-// Replace the local:// or external:// prefix with the correct path
-cSrc = src.replace(
-  isLocal ? LOCAL_PREFIX : EXTERNAL_PREFIX,
-  isLocal ? import.meta.env.LOCAL_IMAGES_URL : import.meta.env.EXTERNAL_IMAGES_URL
-);
+// Get the image url by replacing the local:// or external:// prefix with the correct images directory path
+const cSrc = getImageUrl(src);
 ---
 
-<img class={className} src={cSrc} width={cWidth} height={`${cHeight}`} alt={alt} title={title} />
+<img class={className} src={cSrc} width={width} height={`${height}`} alt={alt} title={title} />
