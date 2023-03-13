@@ -2,9 +2,11 @@
 import type { HTMLAttributes } from 'astro/types';
 import { getImageData, getImageUrl } from './utils';
 // @ts-ignore: The local image map should be available in the Astro site that uses this integration
-import localImageMap from './src/data/local-image-map';
+// import localImageMap from './src/data/local-image-map';
+import localImageMap from './../../../src/data/local-image-map';
 // @ts-ignore: The external image map should be available in the Astro site that uses this integration
-import externalImageMap from './src/data/external-image-map';
+// import externalImageMap from './src/data/external-image-map';
+import externalImageMap from './../../../src/data/external-image-map';
 
 interface Props extends HTMLAttributes<'img'> {}
 

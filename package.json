@@ -1,7 +1,7 @@
 {
   "name": "astro-mapped-images",
   "description": "An Astro image component that handles both local and external images and includes the correct width and height attributes using pre-generated image maps.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "author": "TechAurelian (https://techaurelian.com)",
   "license": "MIT",
