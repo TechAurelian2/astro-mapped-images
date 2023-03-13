@@ -1,8 +1,18 @@
 {
   "name": "astro-mapped-images",
-  "private": true,
-  "version": "0.0.1",
+  "description": "An Astro image component that handles both local and external images and includes the correct width and height attributes using pre-generated image maps.",
+  "version": "1.0.0",
   "type": "module",
+  "author": "TechAurelian (https://techaurelian.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/techaurelian/astro-mapped-images",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techaurelian/astro-mapped-images.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techaurelian/astro-mapped-images/issues"
+  },
   "exports": {
     ".": "./index.ts"
   },
@@ -11,7 +21,10 @@
     "index.ts"
   ],
   "keywords": [
-    "astro-component"
+    "astro",
+    "astro-component",
+    "image",
+    "astro-image"
   ],
   "scripts": {},
   "devDependencies": {
