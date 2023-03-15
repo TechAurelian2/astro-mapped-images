@@ -1,13 +1,13 @@
 /**
  * @license
- * Copyright (c) TechAurelian
+ * Copyright (c) TechAurelian {@link https://techaurelian.com}
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { MappedImage, MappedImageSchema } from './types';
-import type { ImageMap } from './types';
+import { MappedImage, MappedImageSchema } from './../types';
+import type { ImageMap } from './../types';
 
 const LOCAL_PREFIX = 'local://';
 const EXTERNAL_PREFIX = 'external://';
