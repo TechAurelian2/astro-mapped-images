@@ -13,8 +13,23 @@ import { z } from 'astro/zod';
  */
 export const MappedImageSchema = z
   .object({
-    width: z.number(),
-    height: z.number(),
+    /** The alternative text description of the image. This is required! */ 
+    alt: z.string(),
+    
+    /** The optional classes to apply to the image. */
+    class: z.string().optional(),
+    
+    /** The optional height of the image */
+    height: z.number().optional(),
+    
+    /** The mandatory image URL. */
+    src: z.string(),
+
+    /** The optional advisory text of the image. */
+    title: z.string().optional(),
+
+    /** The optional width of the image */
+    width: z.number().optional(),
   })
   .strict();
 
@@ -22,8 +37,3 @@ export const MappedImageSchema = z
  * The type of a mapped image.
  */
 export type MappedImage = z.infer<typeof MappedImageSchema>;
-
-/**
- * A map of image paths to their mapped image data.
- */
-export type ImageMap = Record<string, MappedImage>;

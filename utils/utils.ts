@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { MappedImage, MappedImageSchema } from './../types';
+import { ImageMapEntrySchema } from './../types';
+import type { ImageMapEntry } from './../types';
 import type { ImageMap } from './../types';
 
 const LOCAL_PREFIX = 'local://';
@@ -47,7 +48,7 @@ export function getImageData(
   src: string,
   localImageMap: ImageMap,
   externalImageMap: ImageMap
-): MappedImage {
+): ImageMapEntry {
   const isLocal = isLocalImage(src);
 
   // Remove the prefix from the src to get the key for the image map
@@ -60,7 +61,7 @@ export function getImageData(
   let width: number;
   let height: number;
   try {
-    ({ width, height } = MappedImageSchema.parse(map[cSrc as keyof typeof map]));
+    ({ width, height } = ImageMapEntrySchema.parse(map[cSrc as keyof typeof map]));
   } catch (e) {
     throw new Error(`Unable to find valid map data for image:\n${src}`);
   }

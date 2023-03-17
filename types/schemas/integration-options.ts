@@ -7,7 +7,7 @@
  */
 
 import { z } from 'astro/zod';
-import { MappedImageSchema } from './mapped-image';
+import { ImageMapSchema } from './image-map';
 
 /**
  * The schema of the integration options.
@@ -15,10 +15,10 @@ import { MappedImageSchema } from './mapped-image';
 const astroMappedImagesOptionsSchema = z
   .object({
     // The local image map.
-    localImageMap: z.record(MappedImageSchema),
+    localImageMap: ImageMapSchema,
 
     // The external image map.
-    externalImageMap: z.record(MappedImageSchema),
+    externalImageMap: ImageMapSchema,
   })
   .strict();
 

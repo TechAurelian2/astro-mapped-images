@@ -8,7 +8,9 @@
 
 // Re-export schemas and types that the user needs to access from this Astro integration.
 export { MappedImageSchema } from './schemas/mapped-image';
-export type { MappedImage, ImageMap } from './schemas/mapped-image';
+export type { MappedImage } from './schemas/mapped-image';
+export { ImageMapEntrySchema, ImageMapSchema } from './schemas/image-map';
+export type { ImageMapEntry, ImageMap } from './schemas/image-map';
 
 // Re-export the integration options schema.
 export type { astroMappedImagesOptions } from './schemas/integration-options';

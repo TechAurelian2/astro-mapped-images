@@ -7,12 +7,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { HTMLAttributes } from 'astro/types';
+import type { MappedImage } from './../types';
 import { getImageData, getImageUrl } from './../utils/utils';
 
-interface Props extends HTMLAttributes<'img'> {}
+type Props = MappedImage;
 
-const { alt, class: className, src, title } = Astro.props;
+const { alt, class: className, height, src, title, width } = Astro.props;
 
 // Validate props
 if (!src) throw new Error('ImageTag requires a src prop for the image src attribute.');
@@ -21,11 +21,13 @@ if (!alt) throw new Error(`ImageTag requires an alt prop for the image alt text.
 const localImageMap = globalThis.astroMappedImagesOptions.localImageMap;
 const externalImageMap = globalThis.astroMappedImagesOptions.externalImageMap;
 
-// Get the image width and height from the corresponding image map
-const { width, height } = getImageData(src, localImageMap, externalImageMap);
+// Get the image width and height from props or from the corresponding image map
+const { width: mWidth, height: mHeight } = getImageData(src, localImageMap, externalImageMap);
+const cWidth = width ?? mWidth;
+const cHeight = height ?? mHeight;
 
 // Get the image url by replacing the local:// or external:// prefix with the correct images directory path
 const cSrc = getImageUrl(src);
 ---
 
-<img class={className} src={cSrc} width={width} height={`${height}`} alt={alt} title={title} />
+<img class={className} src={cSrc} width={cWidth} height={`${cHeight}`} alt={alt} title={title} />
