@@ -14,9 +14,13 @@ type Props = MappedImage;
 
 const { alt, class: className, height, src, title, width } = Astro.props;
 
-// Validate props
+// Validate the src prop
 if (!src) throw new Error('ImageTag requires a src prop for the image src attribute.');
-if (!alt) throw new Error(`ImageTag requires an alt prop for the image alt text.\nsrc: ${src}`);
+
+// Validate the alt prop
+if (alt === null || alt === undefined) {
+  throw new Error(`ImageTag requires an alt prop for the image alt text. Use an empty string if the image is decorative.\nsrc: ${src}`);
+}
 
 const localImageMap = globalThis.astroMappedImagesOptions.localImageMap;
 const externalImageMap = globalThis.astroMappedImagesOptions.externalImageMap;
