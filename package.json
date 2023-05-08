@@ -27,6 +27,6 @@
   ],
   "scripts": {},
   "devDependencies": {
-    "astro": "^2.2.0"
+    "astro": "^2.4.2"
   }
 }
